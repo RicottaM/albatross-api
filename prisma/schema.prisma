@@ -1,15 +1,49 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int         @id @default(autoincrement())
+  login        String      @unique
+  passwordHash String      @map("password_hash")
+  userPoints   UserPoint[] @relation("UserUserPoints")
+
+  @@map("user")
+}
+
+model Category {
+  id     Int     @id @default(autoincrement())
+  name   String
+  points Point[]
+
+  @@map("category")
+}
+
+model Point {
+  id         Int         @id @default(autoincrement())
+  name       String
+  latitude   Float
+  longitude  Float
+  categoryId Int?        @map("category_id")
+  category   Category?   @relation(fields: [categoryId], references: [id])
+  userPoints UserPoint[] @relation("PointUserPoints")
+
+  @@map("point")
+}
+
+model UserPoint {
+  id      Int   @id @default(autoincrement())
+  userId  Int   @map("user_id")
+  pointId Int   @map("point_id")
+
+  user    User  @relation("UserUserPoints", fields: [userId], references: [id])
+  point   Point @relation("PointUserPoints", fields: [pointId], references: [id])
+
+  @@unique([userId, pointId])
+  @@map("user_point")
 }
