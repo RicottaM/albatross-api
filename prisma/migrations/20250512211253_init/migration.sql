@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
-    "email" TEXT NOT NULL,
+    "login" TEXT NOT NULL,
     "password_hash" TEXT NOT NULL,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
@@ -36,7 +36,7 @@ CREATE TABLE "user_point" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
+CREATE UNIQUE INDEX "user_login_key" ON "user"("login");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_point_user_id_point_id_key" ON "user_point"("user_id", "point_id");
