@@ -1,15 +1,13 @@
+import { injectable } from 'tsyringe';
 import { Request, Response } from 'express';
 import { CategoryService } from '../services/category.service';
 
+@injectable()
 export class CategoryController {
-  private categoryService = new CategoryService();
+  constructor(private categoryService: CategoryService) {}
 
   async getAll(req: Request, res: Response) {
-    try {
-      const categories = await this.categoryService.getAllCategories();
-      res.json(categories);
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch categories' });
-    }
+    const categories = await this.categoryService.getAll();
+    res.json(categories);
   }
 }

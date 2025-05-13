@@ -1,10 +1,12 @@
+import { injectable } from 'tsyringe';
 import { CategoryRepository } from '@/api/repositories/category.repository';
 import { Category } from '@prisma/client';
 
+@injectable()
 export class CategoryService {
-  private categoryRepository = new CategoryRepository();
+  constructor(private categoryRepository: CategoryRepository) {}
 
-  async getAllCategories() {
+  async getAll() {
     return this.categoryRepository.getAll();
   }
 }

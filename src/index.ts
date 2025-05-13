@@ -1,5 +1,6 @@
 import 'module-alias/register';
 import 'dotenv/config';
+import 'reflect-metadata';
 import express from 'express';
 import logger from '@/config/logger';
 import categoryRouter from '@/api/routes/category.routes';
@@ -10,7 +11,7 @@ const mode = process.env.NODE_ENV || 'development';
 const app = express();
 
 app.use(express.json());
-app.use(categoryRouter);
+app.use('/categories', categoryRouter);
 
 app.use(errorHandler);
 
