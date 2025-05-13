@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "An API written in node including typescript for GIS web application needs.",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "db:migrate": "npx prisma migrate dev",
