@@ -2,10 +2,10 @@
   "name": "albatross-api",
   "version": "1.0.0",
   "description": "An API written in node including typescript for GIS web application needs.",
-  "main": "index.js",
+  "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon -r tsconfig-paths/register src/server.ts",
     "db:migrate": "npx prisma migrate dev",
     "db:client": "npx prisma generate",
     "db:seed": "node prisma/seeds/init.js",
@@ -16,6 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/module-alias": "^2.0.4",
     "@types/node": "^22.15.17",
     "nodemon": "^3.1.10",
@@ -27,8 +28,11 @@
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",
     "reflect-metadata": "^0.2.2",
     "tsyringe": "^4.10.0",

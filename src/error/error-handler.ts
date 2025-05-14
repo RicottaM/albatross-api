@@ -1,3 +1,4 @@
+import logger from '@/config/logger';
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '@/error/app-error';
 
@@ -6,7 +7,7 @@ export const errorHandler = (error: AppError, req: Request, res: Response, next:
   error.message = error.message || 'An error has occured.';
 
   if (process.env.NODE_ENV !== 'production') {
-    console.error(error.message);
+    logger.error(`[error-handler]: ${error.message}`);
   }
 
   res.status(error.status).json({
