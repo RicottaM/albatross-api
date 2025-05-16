@@ -5,7 +5,7 @@ import express from 'express';
 import logger from '@/config/logger';
 import categoryRouter from '@/api/routes/category.routes';
 import authRouter from '@/api/routes/auth.routes';
-import { errorHandler } from '@/error/error-handler';
+import { errorHandler } from '@/middleware/errorHandler';
 
 const port = process.env.PORT || 3000;
 const mode = process.env.NODE_ENV || 'development';

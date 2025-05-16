@@ -1,6 +1,6 @@
 import logger from '@/config/logger';
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '@/error/app-error';
+import { AppError } from '@/utils/classes/AppError';
 
 export const errorHandler = (error: AppError, req: Request, res: Response, next: NextFunction) => {
   error.status = error.status || 500;

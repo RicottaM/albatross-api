@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { injectable } from 'tsyringe';
 import { UserRepository } from '@/api/repositories/user.repository';
-import { AppError } from '@/error/app-error';
+import { AppError } from '@/utils/classes/AppError';
 
 @injectable()
 export class AuthService {

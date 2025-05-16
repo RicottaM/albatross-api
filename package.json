@@ -40,6 +40,6 @@
     "winston-daily-rotate-file": "^5.0.0"
   },
   "_moduleAliases": {
-    "@": "dist"
+    "@": "src"
   }
 }
