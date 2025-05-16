@@ -9,11 +9,13 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
     throw new AppError('Token missing.', 401);
   }
 
-  if (!process.env.SECRET) {
+  const secret = process.env.JWT_SECRET;
+
+  if (!secret) {
     throw new AppError('No JWT Secret in env.', 500);
   }
 
-  jwt.verify(token, String(process.env.SECRET), (err: VerifyErrors | null) => {
+  jwt.verify(token, secret, (err: VerifyErrors | null) => {
     if (err) {
       throw new AppError('Token expired or invalid.', 401);
     }

@@ -2,6 +2,7 @@ import 'module-alias/register';
 import 'dotenv/config';
 import 'reflect-metadata';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import logger from '@/config/logger';
 import categoryRouter from '@/api/routes/category.routes';
 import authRouter from '@/api/routes/auth.routes';
@@ -12,6 +13,8 @@ const mode = process.env.NODE_ENV || 'development';
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
+
 app.use('/auth', authRouter);
 app.use('/categories', categoryRouter);
 
