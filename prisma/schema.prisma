@@ -11,17 +11,17 @@ model User {
   id           Int         @id @default(autoincrement())
   login        String      @unique
   passwordHash String      @map("password_hash")
-  userPoints   UserPoint[] @relation("UserUserPoints")
+  userPoints   UserPoint[] @relation("UserUserPoints") 
 
-  @@map("user")
+  @@map("users")
 }
 
 model Category {
   id     Int     @id @default(autoincrement())
-  name   String
+  name   String  @unique
   points Point[]
 
-  @@map("category")
+  @@map("categories")
 }
 
 model Point {
@@ -30,10 +30,10 @@ model Point {
   latitude   Float
   longitude  Float
   categoryId Int?        @map("category_id")
-  category   Category?   @relation(fields: [categoryId], references: [id])
-  userPoints UserPoint[] @relation("PointUserPoints")
+  category   Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  userPoints UserPoint[] @relation("PointUserPoints") 
 
-  @@map("point")
+  @@map("points")
 }
 
 model UserPoint {
@@ -41,9 +41,9 @@ model UserPoint {
   userId  Int   @map("user_id")
   pointId Int   @map("point_id")
 
-  user    User  @relation("UserUserPoints", fields: [userId], references: [id])
-  point   Point @relation("PointUserPoints", fields: [pointId], references: [id])
+  user    User  @relation("UserUserPoints", fields: [userId], references: [id], onDelete: Cascade) 
+  point   Point @relation("PointUserPoints", fields: [pointId], references: [id], onDelete: Cascade) 
 
   @@unique([userId, pointId])
-  @@map("user_point")
+  @@map("users_points")
 }

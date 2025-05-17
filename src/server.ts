@@ -4,6 +4,7 @@ import 'reflect-metadata';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from '@/config/logger';
+import pointRouter from './api/routes/point.routes';
 import categoryRouter from '@/api/routes/category.routes';
 import authRouter from '@/api/routes/auth.routes';
 import { errorHandler } from '@/middleware/errorHandler';
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use('/auth', authRouter);
 app.use('/categories', categoryRouter);
+app.use('/points', pointRouter);
 
 app.use(errorHandler);
 
