@@ -1,7 +1,7 @@
 import { injectable } from 'tsyringe';
 import { CategoryRepository } from '@/api/repositories/category.repository';
 import { Prisma } from '@prisma/client';
-import { AppError } from '@/utils/classes/AppError';
+import { AppError } from '@/utils/AppError';
 
 @injectable()
 export class CategoryService {

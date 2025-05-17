@@ -1,6 +1,6 @@
 import jwt, { VerifyErrors } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '@/utils/classes/AppError';
+import { AppError } from '@/utils/AppError';
 
 export const checkToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token;

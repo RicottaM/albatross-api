@@ -1,7 +1,7 @@
 import { injectable } from 'tsyringe';
 import { PointRepository } from '@/api/repositories/point.repository';
 import { Prisma } from '@prisma/client';
-import { AppError } from '@/utils/classes/AppError';
+import { AppError } from '@/utils/AppError';
 
 @injectable()
 export class PointService {

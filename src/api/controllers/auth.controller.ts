@@ -2,6 +2,7 @@ import { injectable } from 'tsyringe';
 import { Request, Response } from 'express';
 import { AuthService } from '@/api/services/auth.service';
 import { sendTokenResponse } from '@/utils/sendTokenResponse';
+import { clearToken } from '@/utils/clearToken';
 
 @injectable()
 export class AuthController {
@@ -21,14 +22,6 @@ export class AuthController {
   }
 
   async logout(req: Request, res: Response) {
-    res
-      .cookie('token', '', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        expires: new Date(0),
-      })
-      .status(200)
-      .json({ message: 'Logout successful.' });
+    clearToken(res);
   }
 }
