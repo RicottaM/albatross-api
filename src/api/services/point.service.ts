@@ -11,8 +11,8 @@ export class PointService {
     return this.pointRepository.getAll();
   }
 
-  async create(point: Prisma.PointCreateInput) {
-    return this.pointRepository.create(point);
+  async create(point: Prisma.PointCreateInput, userId: number) {
+    return this.pointRepository.create(point, userId);
   }
 
   async getById(id: number) {
@@ -43,5 +43,15 @@ export class PointService {
     }
 
     return this.pointRepository.delete(id);
+  }
+
+  async getByUser(userId: number) {
+    const points = await this.pointRepository.getByUser(userId);
+
+    if (!points || points.length === 0) {
+      throw new AppError(`No points found for user with id "${userId}".`, 404);
+    }
+
+    return points;
   }
 }

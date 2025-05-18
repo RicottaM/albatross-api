@@ -8,7 +8,7 @@ export const sendTokenResponse = ({ res, token, type, user }: SetTokenResponseOp
       httpOnly: true,
       secure: isProduction,
       sameSite: 'lax',
-      maxAge: 60 * 60 * 1000, // 1h
+      maxAge: 60 * 60 * 1000,
     })
     .status(type === 'register' ? 201 : 200)
     .json({

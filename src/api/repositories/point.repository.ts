@@ -14,15 +14,31 @@ export class PointRepository {
     });
   }
 
-  async create(point: Prisma.PointCreateInput) {
+  async create(point: Prisma.PointCreateInput, userId: number) {
     return prisma.point.create({
-      data: point,
+      data: {
+        ...point,
+        userPoints: {
+          create: {
+            userId,
+          },
+        },
+      },
     });
   }
 
   async getById(id: number) {
     return prisma.point.findUnique({
       where: { id },
+    });
+  }
+
+  async getByUser(userId: number) {
+    return prisma.userPoint.findMany({
+      where: { userId },
+      include: {
+        point: true,
+      },
     });
   }
 

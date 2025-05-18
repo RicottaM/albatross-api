@@ -9,6 +9,7 @@ const pointRouter = Router();
 const controller = container.resolve(PointController);
 
 pointRouter.get('/', checkToken, controller.getAll.bind(controller));
+pointRouter.get('/user', checkToken, controller.getByUser.bind(controller));
 pointRouter.get('/:id', checkToken, controller.getById.bind(controller));
 pointRouter.post('/', checkToken, validate(pointSchema), controller.create.bind(controller));
 pointRouter.put('/:id', checkToken, validate(pointSchema), controller.update.bind(controller));
