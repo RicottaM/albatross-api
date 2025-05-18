@@ -1,6 +1,6 @@
-import jwt, { VerifyErrors } from 'jsonwebtoken';
+import jwt, { VerifyErrors, JwtPayload } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '@/utils/classes/AppError';
+import { AppError } from '@/utils/AppError';
 
 export const checkToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token;
@@ -15,10 +15,11 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
     throw new AppError('No JWT Secret in env.', 500);
   }
 
-  jwt.verify(token, secret, (err: VerifyErrors | null) => {
-    if (err) {
-      throw new AppError('Token expired or invalid.', 401);
+  jwt.verify(token, secret, (error: VerifyErrors | null, decoded?: string | JwtPayload) => {
+    if (error || typeof decoded === 'string') {
+      throw new AppError('Invalid token.', 401);
     }
+    (req as any).user = { id: decoded?.userId };
     next();
   });
 };
