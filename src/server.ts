@@ -8,6 +8,7 @@ import logger from '@/config/logger';
 import pointRouter from './api/routes/point.routes';
 import categoryRouter from '@/api/routes/category.routes';
 import authRouter from '@/api/routes/auth.routes';
+import userRouter from './api/routes/user.routes';
 import { errorHandler } from '@/middleware/errorHandler';
 import { corsOptions } from '@/config/corsOptions';
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use('/auth', authRouter);
 app.use('/categories', categoryRouter);
 app.use('/points', pointRouter);
+app.use('/users', userRouter);
 
 app.use(errorHandler);
 
