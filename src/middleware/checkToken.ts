@@ -6,7 +6,7 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token;
 
   if (!token) {
-    throw new AppError('Token missing.', 401);
+    throw new AppError('Unauthorized.', 401);
   }
 
   const secret = process.env.JWT_SECRET;
