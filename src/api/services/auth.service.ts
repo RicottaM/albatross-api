@@ -8,6 +8,16 @@ import { AppError } from '@/utils/AppError';
 export class AuthService {
   constructor(private userRepository: UserRepository) {}
 
+  async getById(id: number) {
+    const user = await this.userRepository.getById(id);
+
+    if (!user) {
+      throw new AppError(`User with id "${id}" not found.`, 404);
+    }
+
+    return user;
+  }
+
   async getAll() {
     return this.userRepository.getAll();
   }

@@ -46,6 +46,10 @@ export class PointService {
   }
 
   async getByUser(userId: number) {
+    if (!userId) {
+      throw new AppError('User not authenticated.', 403);
+    }
+
     const points = await this.pointRepository.getByUser(userId);
 
     if (!points || points.length === 0) {

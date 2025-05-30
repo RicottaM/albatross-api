@@ -14,9 +14,6 @@ export class PointController {
 
   async getByUser(req: Request, res: Response) {
     const userId = (req as any).user?.id;
-    if (!userId) {
-      throw new AppError('User not authenticated.', 403);
-    }
     const points = await this.pointService.getByUser(userId);
     res.json(points);
   }

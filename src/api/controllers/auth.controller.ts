@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { AuthService } from '@/api/services/auth.service';
 import { sendTokenResponse } from '@/utils/sendTokenResponse';
 import { clearToken } from '@/utils/clearToken';
+import { AppError } from '@/utils/AppError';
 
 @injectable()
 export class AuthController {
@@ -19,6 +20,12 @@ export class AuthController {
     const { login, password } = req.body;
     const token = await this.authService.login(login, password);
     sendTokenResponse({ res, token, type: 'login' });
+  }
+
+  async getById(req: Request, res: Response) {
+    const userId = (req as any).user?.id;
+    const user = await this.authService.getById(userId);
+    res.json({ login: user.login });
   }
 
   async logout(req: Request, res: Response) {

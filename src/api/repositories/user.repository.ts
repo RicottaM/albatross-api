@@ -7,6 +7,12 @@ export class UserRepository {
     return prisma.user.findMany();
   }
 
+  async getById(id: number) {
+    return prisma.user.findUnique({
+      where: { id },
+    });
+  }
+
   async getByLogin(login: string) {
     return prisma.user.findUnique({
       where: { login },
