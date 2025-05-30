@@ -22,12 +22,10 @@ export class AuthController {
     sendTokenResponse({ res, token, type: 'login' });
   }
 
-  async getCurrentUser(req: Request, res: Response) {
-    const user = (req as any).user;
-    if (!user) {
-      throw new AppError('Sing in for full experience.', 401);
-    }
-    res.json({ user: user });
+  async getById(req: Request, res: Response) {
+    const userId = (req as any).user?.id;
+    const user = await this.authService.getById(userId);
+    res.json({ login: user.login });
   }
 
   async logout(req: Request, res: Response) {
