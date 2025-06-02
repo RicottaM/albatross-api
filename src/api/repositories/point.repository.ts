@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe';
-import prisma from '@/db/DbClient';
 import { Prisma } from '@prisma/client';
+import prisma from '@/db/DbClient';
 
 @injectable()
 export class PointRepository {
@@ -37,7 +37,11 @@ export class PointRepository {
     return prisma.userPoint.findMany({
       where: { userId },
       include: {
-        point: true,
+        point: {
+          include: {
+            category: true,
+          },
+        },
       },
     });
   }
