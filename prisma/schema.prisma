@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int         @id @default(autoincrement())
+  login        String      @unique
+  passwordHash String      @map("password_hash")
+  userPoints   UserPoint[] @relation("UserUserPoints") 
+
+  @@map("users")
+}
+
+model Category {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  points Point[]
+
+  @@map("categories")
+}
+
+model Point {
+  id         Int         @id @default(autoincrement())
+  name       String
+  latitude   Float
+  longitude  Float
+  categoryId Int?        @map("category_id")
+  category   Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  userPoints UserPoint[] @relation("PointUserPoints") 
+
+  @@map("points")
+}
+
+model UserPoint {
+  id      Int   @id @default(autoincrement())
+  userId  Int   @map("user_id")
+  pointId Int   @map("point_id")
+
+  user    User  @relation("UserUserPoints", fields: [userId], references: [id], onDelete: Cascade) 
+  point   Point @relation("PointUserPoints", fields: [pointId], references: [id], onDelete: Cascade) 
+
+  @@unique([userId, pointId])
+  @@map("users_points")
+}

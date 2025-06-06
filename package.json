@@ -1,0 +1,50 @@
+{
+  "name": "albatross-api",
+  "version": "1.0.0",
+  "description": "An API written in node including typescript for GIS web application needs.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon -r tsconfig-paths/register src/server.ts",
+    "db:migrate": "npx prisma migrate dev",
+    "db:client": "npx prisma generate",
+    "db:seed": "node prisma/seeds/init.js",
+    "db:reset": "npx prisma migrate reset"
+  },
+  "keywords": [],
+  "author": "michael-json",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/module-alias": "^2.0.4",
+    "@types/node": "^22.15.17",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3",
+    "prisma": "^6.7.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.10.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "zod": "^3.24.4"
+  },
+  "_moduleAliases": {
+    "@": "src"
+  }
+}
